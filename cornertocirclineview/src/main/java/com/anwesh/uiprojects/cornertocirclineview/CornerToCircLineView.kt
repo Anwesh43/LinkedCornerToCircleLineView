@@ -40,17 +40,21 @@ fun Canvas.drawCCLNode(i : Int, scale : Float, paint : Paint) {
     val sc1 : Float = scale.divideScale(0, 2)
     val sc2 : Float = scale.divideScale(1, 2)
     val size : Float = gap / sizeFactor
-    val r1 : Float = size
+    val r1 : Float = size / 2
     val r2 : Float = size * Math.sqrt(2.0).toFloat()
     val sx : Float = r1.crx(angleDeg)
     val sy : Float = r1.cry(angleDeg)
     val dx : Float = r2.crx(angleDeg)
     val dy : Float = r2.cry(angleDeg)
+    paint.color = foreColor
+    paint.strokeWidth = Math.min(w, h) / strokeFactor
+    paint.strokeCap = Paint.Cap.ROUND
+    paint.style = Paint.Style.STROKE
     save()
     translate(w / 2, gap * (i + 1))
     rotate(90f * sc2)
     drawRect(RectF(-size, -size, size, size), paint)
-    drawCircle(0f, 0f, size, paint)
+    drawCircle(0f, 0f, r1, paint)
     for (j in 0..(lines - 1)) {
         val sc : Float = sc1.divideScale(j, lines)
         save()
