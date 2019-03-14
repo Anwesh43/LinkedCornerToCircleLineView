@@ -193,4 +193,26 @@ class CornerToCircLineView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : CornerToCircLineView) {
+
+        private val ccl : CornerToCircle = CornerToCircle(0)
+        private val animator : Animator = Animator(view)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            ccl.draw(canvas, paint)
+            animator.animate {
+                ccl.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            ccl.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
