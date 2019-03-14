@@ -217,4 +217,13 @@ class CornerToCircLineView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : CornerToCircLineView {
+            val view : CornerToCircLineView = CornerToCircLineView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
